@@ -5,7 +5,7 @@ from datacenter.models import Mark, Chastisement, Lesson, Schoolkid, Commendatio
 
 
 def fix_marks(schoolkid):
-    schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid)
+    schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid)[0]
     child_marks = Mark.objects.filter(schoolkid=schoolkid, points__in=[2,3])
     for child_mark in child_marks:
         child_mark.points = 5
@@ -13,7 +13,7 @@ def fix_marks(schoolkid):
 
 
 def remove_chastisements(schoolkid):
-    schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid)
+    schoolkid = Schoolkid.objects.filter(full_name__contains=schoolkid)[0]
     child_chastisements = Chastisement.objects.filter(schoolkid=schoolkid)
     child_chastisements.delete()
 
